@@ -1,9 +1,23 @@
+buildscript {
+  repositories {
+    jcenter()
+    // enable this to use snapshot versions of Gretty:
+    // maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local' }
+  }
+
+  dependencies {
+    classpath 'org.akhikhl.gretty:gretty:+'
+  }
+}
+
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'jetty'
+apply plugin: 'org.akhikhl.gretty'
+
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -11,4 +25,8 @@ dependencies {
             'javax.servlet.jsp:jsp-api:2.1'
     runtime 'javax.servlet:jstl:1.1.2',
             'taglibs:standard:1.1.2'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
 }
